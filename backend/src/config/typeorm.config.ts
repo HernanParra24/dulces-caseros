@@ -20,7 +20,7 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       type: 'postgres',
-      url: this.configService.get<string>('DATABASE_URL') || 'postgresql://postgres:password123@localhost:5432/dulces_caseros',
+                    url: this.configService.get<string>('DATABASE_URL') || 'postgresql://postgres:your_password@localhost:5432/dulces_caseros',
       entities: [User, Product, UpcomingProduct, Order, OrderItem, Review, Favorite, SupportTicket, ContactMessage, Notification, SiteConfig],
       synchronize: true,
       logging: this.configService.get<string>('NODE_ENV') === 'development',

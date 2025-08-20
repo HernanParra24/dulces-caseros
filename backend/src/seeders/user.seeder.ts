@@ -8,7 +8,7 @@ const users = [
     firstName: 'Hernan',
     lastName: 'Parra',
     phone: '2615632310',
-    password: 'password123',
+    password: 'your_password',
     role: UserRole.ADMIN,
     emailVerified: true,
   },
@@ -17,7 +17,7 @@ const users = [
     firstName: 'Usuario',
     lastName: 'Prueba',
     phone: '2611234567',
-    password: 'password123',
+    password: 'your_password',
     role: UserRole.USER,
     emailVerified: true,
   }

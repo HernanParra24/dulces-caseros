@@ -12,7 +12,7 @@ import { Notification } from '../notifications/entities/notification.entity';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  url: process.env.DATABASE_URL || 'postgresql://postgres:password123@localhost:5432/dulces_caseros',
+  url: process.env.DATABASE_URL || 'postgresql://postgres:your_password@localhost:5432/dulces_caseros',
   entities: [User, Product, UpcomingProduct, Order, OrderItem, Review, Favorite, SupportTicket, ContactMessage, Notification],
   migrations: ['src/migrations/*.ts'],
   synchronize: process.env.NODE_ENV !== 'production',
