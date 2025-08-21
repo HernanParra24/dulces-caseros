@@ -321,8 +321,8 @@ export function ProductReviews({ productId, productName }: ProductReviewsProps) 
                   </div>
                   <div>
                                          <p className="font-medium text-gray-900">
-                       Usuario
-                     </p>
+                      {review.user ? `${review.user.firstName} ${review.user.lastName}` : 'Usuario'}
+                    </p>
                     <p className="text-sm text-gray-500">
                       {formatDate(review.createdAt)}
                     </p>
