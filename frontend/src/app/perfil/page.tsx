@@ -208,71 +208,36 @@ function PerfilContent() {
                 {/* Imagen de Perfil */}
                 <div className="text-center mb-6">
                   <div className="relative inline-block group">
-                    {/* Contenedor principal de la imagen */}
-                    <div className="relative w-32 h-32 mx-auto mb-4">
-                      {/* Imagen de perfil */}
-                      <div className="w-full h-full rounded-full overflow-hidden border-4 border-orange-200 shadow-xl bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-2xl transition-all duration-300">
-                        {imagePreview ? (
-                          <img 
-                            src={imagePreview} 
-                            alt="Perfil" 
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <User className="w-16 h-16 text-orange-400" />
-                          </div>
-                        )}
-                      </div>
-                      
-                      {/* Overlay con botón de cambio de imagen */}
-                      {isEditing && (
-                        <div className="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                          <label className="bg-white text-orange-600 p-3 rounded-full cursor-pointer hover:bg-orange-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110 flex flex-col items-center">
-                            <Camera className="w-5 h-5 mb-1" />
-                            <span className="text-xs font-medium">Cambiar</span>
-                            <input
-                              type="file"
-                              accept="image/*"
-                              onChange={handleImageChange}
-                              className="hidden"
-                            />
-                          </label>
+                    <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100 mx-auto mb-4 border-4 border-gray-200 shadow-sm">
+                      {imagePreview ? (
+                        <img 
+                          src={imagePreview} 
+                          alt="Perfil" 
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                          <User className="w-12 h-12 text-gray-400" />
                         </div>
                       )}
                     </div>
-                    
-                    {/* Información de ayuda mejorada */}
                     {isEditing && (
-                      <div className="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 mb-4">
-                        <div className="flex items-center justify-center space-x-2 mb-2">
-                          <Camera className="w-4 h-4 text-orange-600" />
-                          <span className="text-sm font-medium text-orange-800">Cambiar foto de perfil</span>
-                        </div>
-                        <div className="text-xs text-orange-700 space-y-1">
-                          <p>• Haz clic en la imagen para seleccionar una nueva foto</p>
-                          <p>• Formatos soportados: JPG, PNG, GIF</p>
-                          <p>• Tamaño máximo: 5MB</p>
+                      <div className="absolute bottom-0 right-0">
+                        <label className="bg-orange-600 text-white p-2 rounded-full cursor-pointer hover:bg-orange-700">
+                          <Camera className="w-4 h-4" />
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            className="hidden"
+                          />
+                        </label>
+                        <div className="absolute top-full left-0 mt-2 w-48 bg-gray-800 text-white text-xs rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          Máximo 5MB, se redimensionará automáticamente
                         </div>
                       </div>
                     )}
                   </div>
-                  
-                  {/* Botón alternativo para móviles mejorado */}
-                  {isEditing && (
-                    <div className="md:hidden mt-4">
-                      <label className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl transform hover:scale-105">
-                        <Camera className="w-4 h-4 mr-2" />
-                        <span className="text-sm font-medium">Cambiar foto de perfil</span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageChange}
-                          className="hidden"
-                        />
-                      </label>
-                    </div>
-                  )}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
