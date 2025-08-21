@@ -47,7 +47,7 @@ export default function LogoUpload({
       const formData = new FormData();
       formData.append('image', file);
 
-      const response = await fetch('http://localhost:3001/upload/image', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://dulces-caseros.onrender.com'}/upload/image`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
