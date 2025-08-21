@@ -51,8 +51,6 @@ export default function OrderDetailPage() {
         return <Clock className="w-5 h-5 text-yellow-600" />;
       case OrderStatus.CONFIRMED:
         return <CheckCircle className="w-5 h-5 text-green-600" />;
-      case OrderStatus.SHIPPED:
-        return <Truck className="w-5 h-5 text-blue-600" />;
       case OrderStatus.DELIVERED:
         return <CheckCircle className="w-5 h-5 text-green-600" />;
       case OrderStatus.CANCELLED:
@@ -68,8 +66,6 @@ export default function OrderDetailPage() {
         return 'Pendiente';
       case OrderStatus.CONFIRMED:
         return 'Confirmado';
-      case OrderStatus.SHIPPED:
-        return 'Enviado';
       case OrderStatus.DELIVERED:
         return 'Entregado';
       case OrderStatus.CANCELLED:
