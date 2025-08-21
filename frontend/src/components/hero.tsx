@@ -9,9 +9,8 @@ import { useSiteConfig } from '@/hooks/use-site-config';
 export function Hero() {
   const { config, isLoading, refetch } = useSiteConfig();
   
-  // Imagen por defecto si no hay configuración
-  const defaultImage = "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=600&fit=crop&crop=center";
-  const heroImage = config?.heroImageUrl || defaultImage;
+  // Solo usar la imagen configurada, no mostrar imagen por defecto
+  const heroImage = config?.heroImageUrl;
 
   // Actualizar la configuración cuando cambie
   useEffect(() => {
@@ -91,11 +90,22 @@ export function Hero() {
             className="relative"
           >
             <div className="relative z-10">
-              <img
-                src={heroImage}
-                alt="Dulces artesanales argentinos"
-                className="rounded-2xl shadow-strong w-full h-[400px] lg:h-[500px] object-cover"
-              />
+              {heroImage ? (
+                <img
+                  src={heroImage}
+                  alt="Dulces artesanales argentinos"
+                  className="rounded-2xl shadow-strong w-full h-[400px] lg:h-[500px] object-cover"
+                />
+              ) : (
+                <div className="rounded-2xl shadow-strong w-full h-[400px] lg:h-[500px] bg-gradient-to-br from-orange-100 to-purple-100 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-purple-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-white text-2xl">🍰</span>
+                    </div>
+                    <p className="text-gray-600 text-sm">Cargando imagen...</p>
+                  </div>
+                </div>
+              )}
             </div>
             
             {/* Floating elements */}
