@@ -116,12 +116,14 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-4">
             {/* Favorites */}
             {user && (
-              <Link
-                href="/perfil#favoritos"
+              <button
+                onClick={() => {
+                  router.push('/perfil?tab=favorites');
+                }}
                 className="p-2 text-gray-700 hover:text-orange-600 transition-colors"
               >
                 <Heart className="h-6 w-6" />
-              </Link>
+              </button>
             )}
 
             {/* Cart */}
