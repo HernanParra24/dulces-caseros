@@ -72,7 +72,7 @@ export function AdminNotificationPreferences() {
   };
 
   const getNotificationTypeLabel = (type: string) => {
-    const labels = {
+    const labels: { [key: string]: string } = {
       emailNewsletter: 'Newsletter',
       emailOrders: 'Pedidos',
       emailPromotions: 'Promociones',
@@ -82,7 +82,7 @@ export function AdminNotificationPreferences() {
   };
 
   const getNotificationTypeIcon = (type: string) => {
-    const icons = {
+    const icons: { [key: string]: any } = {
       emailNewsletter: Mail,
       emailOrders: Bell,
       emailPromotions: Mail,
@@ -92,7 +92,7 @@ export function AdminNotificationPreferences() {
   };
 
   const getNotificationTypeColor = (type: string) => {
-    const colors = {
+    const colors: { [key: string]: string } = {
       emailNewsletter: 'text-blue-600',
       emailOrders: 'text-green-600',
       emailPromotions: 'text-purple-600',
