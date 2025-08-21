@@ -43,6 +43,16 @@ function PerfilContent() {
     checkAuth();
   }, [isAuthenticated, router, checkAuth]);
 
+  // Procesar hash después de que el usuario esté autenticado
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && ['profile', 'orders', 'favorites', 'settings', 'stats'].includes(hash)) {
+        setActiveTab(hash as TabType);
+      }
+    }
+  }, [isAuthenticated, user]);
+
   useEffect(() => {
     if (user) {
       setFormData({
@@ -73,13 +83,16 @@ function PerfilContent() {
       }
     };
 
-    // Verificar hash inicial
-    handleHashChange();
+    // Verificar hash inicial con un pequeño delay para asegurar que el componente esté montado
+    const timer = setTimeout(() => {
+      handleHashChange();
+    }, 100);
 
     // Escuchar cambios en el hash
     window.addEventListener('hashchange', handleHashChange);
     
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
