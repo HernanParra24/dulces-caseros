@@ -8,10 +8,18 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DATABASE_URL
-        sync: false
       - key: JWT_SECRET
+        value: 354bd5bf47ca9d0c35e79652553386a588e58a8820feb426090cab6c97b34a3d8bce97726ff3cbac0b00c47e3cdb1b88e6a4e9ab91f9c945bc6dcd229d528cad
+      - key: DATABASE_URL
         sync: false
       - key: CLOUDINARY_URL
         sync: false
+      - key: PORT
+        value: 10000
+
+databases:
+  - name: dulces-caseros-db
+    databaseName: dulces_caseros
+    user: postgres
+    plan: free
 
