@@ -80,6 +80,8 @@ export class NotificationsService {
 
   // Método específico para notificaciones de stock bajo
   async createLowStockNotification(productName: string, currentStock: number): Promise<Notification> {
+    console.log(`🔍 Verificando notificación de stock bajo para: ${productName} (stock: ${currentStock})`);
+    
     // Verificar si ya existe una notificación reciente para este producto
     const recentNotification = await this.findRecentLowStockNotification(productName);
     
@@ -88,24 +90,29 @@ export class NotificationsService {
       return recentNotification;
     }
 
-    return await this.createNotification(
+    console.log(`✅ Creando nueva notificación de stock bajo para: ${productName}`);
+    const notification = await this.createNotification(
       NotificationType.LOW_STOCK,
       'Stock Bajo',
       `El producto "${productName}" tiene stock bajo (${currentStock} unidades restantes)`,
       { productName, currentStock },
     );
+    
+    console.log(`📝 Notificación creada con ID: ${notification.id}`);
+    return notification;
   }
 
   // Buscar notificación reciente de stock bajo para un producto específico
   async findRecentLowStockNotification(productName: string): Promise<Notification | null> {
     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000); // 1 hora atrás
     
+    // Buscar por mensaje que contenga el nombre del producto
     return await this.notificationRepository.findOne({
       where: {
         type: NotificationType.LOW_STOCK,
         title: 'Stock Bajo',
         createdAt: MoreThan(oneHourAgo),
-        data: Like(`%"productName":"${productName}"%`),
+        message: Like(`%${productName}%`),
       },
       order: { createdAt: 'DESC' },
     });

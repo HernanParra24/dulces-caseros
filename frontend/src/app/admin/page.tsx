@@ -446,6 +446,21 @@ function DashboardTab({ stats, isLoading, setActiveTab }: {
             >
               🔄 Verificar stock bajo
             </button>
+            <button 
+              onClick={async () => {
+                try {
+                  await adminService.forceLowStockCheck();
+                  await loadLowStockProducts();
+                  await loadNotifications();
+                  toast.success('Verificación forzada de stock bajo completada');
+                } catch (error) {
+                  toast.error('Error al forzar verificación de stock bajo');
+                }
+              }}
+              className="w-full text-left px-2 py-1 text-xs text-orange-600 hover:bg-orange-50 rounded transition-colors font-medium"
+            >
+              🧹 Forzar verificación (limpia notificaciones)
+            </button>
           </div>
         </div>
       </div>

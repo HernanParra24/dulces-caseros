@@ -3,11 +3,15 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagg
 import { ProductsService } from './products.service';
 import { CreateProductDto, UpdateProductDto, ProductQueryDto } from './dto/product.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @ApiTags('Productos')
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(
+    private readonly productsService: ProductsService,
+    private readonly notificationsService: NotificationsService,
+  ) {}
 
   @Post()
   @UseGuards(JwtAuthGuard)
@@ -95,5 +99,21 @@ export class ProductsController {
   async checkLowStock() {
     await this.productsService.checkLowStockProducts();
     return { message: 'Verificación de stock bajo completada' };
+  }
+
+  @Post('force-low-stock-check')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Forzar verificación de productos con stock bajo (limpia notificaciones antiguas)' })
+  @ApiResponse({ status: 200, description: 'Verificación forzada completada' })
+  @ApiResponse({ status: 401, description: 'No autorizado' })
+  async forceLowStockCheck() {
+    // Limpiar notificaciones antiguas primero
+    await this.notificationsService.cleanOldLowStockNotifications();
+    
+    // Forzar verificación de stock bajo
+    await this.productsService.checkLowStockProducts();
+    
+    return { message: 'Verificación forzada de stock bajo completada' };
   }
 }

@@ -42,4 +42,24 @@ export class NotificationsController {
     await this.notificationsService.deleteNotification(id);
     return { message: 'Notificación eliminada' };
   }
+
+  @Post('clean-old')
+  async cleanOldNotifications() {
+    await this.notificationsService.cleanOldLowStockNotifications();
+    return { message: 'Notificaciones antiguas limpiadas' };
+  }
+
+  @Post('force-low-stock-check')
+  async forceLowStockCheck() {
+    // Limpiar notificaciones antiguas primero
+    await this.notificationsService.cleanOldLowStockNotifications();
+    
+    // Forzar verificación de stock bajo
+    const productsService = this.notificationsService['productsService'];
+    if (productsService) {
+      await productsService.checkLowStockProducts();
+    }
+    
+    return { message: 'Verificación forzada de stock bajo completada' };
+  }
 }

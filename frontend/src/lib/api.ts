@@ -459,6 +459,11 @@ export const adminService = {
     return response.data;
   },
 
+  forceLowStockCheck: async () => {
+    const response = await api.post('/products/force-low-stock-check');
+    return response.data;
+  },
+
   // Email Management
   getAllUserEmails: async () => {
     const response = await api.get('/admin/emails/users');

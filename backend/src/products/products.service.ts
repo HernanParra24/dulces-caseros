@@ -176,6 +176,8 @@ export class ProductsService {
   }
 
   async checkLowStockProducts(): Promise<void> {
+    console.log('🔍 Iniciando verificación de productos con stock bajo...');
+    
     const lowStockProducts = await this.productRepository.find({
       where: {
         stock: Between(1, 5),
@@ -183,16 +185,25 @@ export class ProductsService {
       },
     });
 
+    console.log(`📦 Encontrados ${lowStockProducts.length} productos con stock bajo (≤5)`);
+    
     for (const product of lowStockProducts) {
+      console.log(`🔍 Verificando producto: ${product.name} (stock: ${product.stock})`);
+      
       // Verificar si ya existe una notificación reciente para este producto
       const existingNotification = await this.notificationsService.findRecentLowStockNotification(product.name);
       
       if (!existingNotification) {
+        console.log(`📝 Creando notificación para: ${product.name}`);
         await this.notificationsService.createLowStockNotification(
           product.name,
           product.stock
         );
+      } else {
+        console.log(`⚠️ Notificación ya existe para: ${product.name}`);
       }
     }
+    
+    console.log('✅ Verificación de stock bajo completada');
   }
 }
