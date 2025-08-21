@@ -563,4 +563,18 @@ export class AdminService {
       lastName: user.lastName,
     }));
   }
+
+  // Eliminar cuenta de prueba
+  async deleteTestAdmin() {
+    try {
+      const result = await this.userRepository.delete({
+        email: 'admin@dulcestwilight.com'
+      });
+      
+      return result.affected || 0;
+    } catch (error) {
+      console.error('Error al eliminar cuenta de prueba:', error);
+      throw new InternalServerErrorException('Error al eliminar cuenta de prueba');
+    }
+  }
 }

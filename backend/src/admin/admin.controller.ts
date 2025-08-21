@@ -9,12 +9,15 @@ import {
   Param,
   UseGuards,
   Request,
+  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UserRole } from '../users/entities/user.entity';
 import { OrderStatus, PaymentStatus } from '../orders/entities/order.entity';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
 
 @ApiTags('Administración')
 @Controller('admin')
@@ -315,5 +318,17 @@ export class AdminController {
   async cleanOldNotifications(@Request() req) {
     await this.checkAdminRole(req);
     return await this.adminService.cleanOldNotifications();
+  }
+
+  @Delete('delete-test-admin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN)
+  async deleteTestAdmin() {
+    try {
+      const result = await this.adminService.deleteTestAdmin();
+      return { success: true, message: 'Cuenta de prueba eliminada', deletedCount: result };
+    } catch (error) {
+      throw new BadRequestException('Error al eliminar cuenta de prueba');
+    }
   }
 }
