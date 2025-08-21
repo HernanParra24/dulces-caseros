@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useAuthStore } from '@/stores/auth-store';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -17,7 +17,7 @@ import Link from 'next/link';
 
 type TabType = 'profile' | 'orders' | 'favorites' | 'settings' | 'stats';
 
-export default function PerfilPage() {
+function PerfilContent() {
   const { user, isAuthenticated, logout, updateProfile, deleteAccount, checkAuth } = useAuthStore();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -764,5 +764,13 @@ export default function PerfilPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PerfilPage() {
+  return (
+    <Suspense fallback={<div>Cargando...</div>}>
+      <PerfilContent />
+    </Suspense>
   );
 }
