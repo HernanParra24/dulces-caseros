@@ -20,6 +20,8 @@ async function bootstrap() {
       'http://localhost:3001',
       'http://localhost:3002',
       'http://localhost:3003',
+      'https://dulces-caseros.vercel.app',
+      'https://dulces-caseros-r75gbrpuh-hernanparra24s-projects.vercel.app',
       process.env.FRONTEND_URL
     ].filter(Boolean),
     credentials: true,
