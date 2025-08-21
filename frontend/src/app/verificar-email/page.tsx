@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle, XCircle, Loader2, Mail, RefreshCw } from 'lucide-react';
@@ -9,7 +9,7 @@ import { authService } from '@/lib/api';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
-export default function VerificarEmailPage() {
+function VerificarEmailContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<'loading' | 'success' | 'error' | 'pending'>('loading');
@@ -166,18 +166,26 @@ export default function VerificarEmailPage() {
   };
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="max-w-md mx-auto"
+    >
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+        {renderContent()}
+      </div>
+    </motion.div>
+  );
+}
+
+export default function VerificarEmailPage() {
+  return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
       <main className="container mx-auto px-4 py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-md mx-auto"
-        >
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-            {renderContent()}
-          </div>
-        </motion.div>
+        <Suspense fallback={<div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center">Cargando...</div>}>
+          <VerificarEmailContent />
+        </Suspense>
       </main>
       <Footer />
     </div>
