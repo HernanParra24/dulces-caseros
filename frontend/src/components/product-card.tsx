@@ -78,7 +78,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <img
               src={product.images?.[0] || getRandomImage(product.category)}
               alt={product.name}
-              className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
             />
             
             {/* Badges */}
@@ -125,9 +125,9 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           {/* Content */}
-          <div className="p-5 flex flex-col h-full">
+          <div className="p-4 flex flex-col h-full">
             <div className="flex-1">
-              <h3 className="font-semibold text-lg mb-3 text-gray-900 group-hover:text-orange-600 transition-colors">
+              <h3 className="font-semibold text-base mb-2 text-gray-900 group-hover:text-orange-600 transition-colors">
                 {product.name}
               </h3>
               
@@ -153,7 +153,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Price and stock - siempre al final */}
             <div className="flex items-center justify-between mt-auto">
               <div className="flex items-center space-x-2">
-                <span className="text-xl font-bold text-orange-600">
+                <span className="text-lg font-bold text-orange-600">
                   {formatPrice(product.price)}
                 </span>
                 <StockIndicator 
