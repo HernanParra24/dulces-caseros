@@ -19,30 +19,14 @@ export function Header() {
   const { user, logout, isAuthenticated, checkAuth } = useAuthStore();
   const router = useRouter();
 
-  console.log('Header component rendered with user:', user);
-
   useEffect(() => {
-    console.log('Header component mounted');
     loadSiteConfig();
   }, []);
 
   useEffect(() => {
     // Verificar autenticación al montar el componente
-    console.log('Calling checkAuth...');
     checkAuth();
   }, []);
-
-  // Debug: Log user state
-  useEffect(() => {
-    console.log('=== HEADER DEBUG ===');
-    console.log('User:', user);
-    console.log('isAuthenticated:', isAuthenticated);
-    if (user) {
-      console.log('User firstName:', user.firstName);
-      console.log('User email:', user.email);
-    }
-    console.log('==================');
-  }, [user, isAuthenticated]);
 
   const loadSiteConfig = async () => {
     try {

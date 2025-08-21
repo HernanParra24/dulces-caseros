@@ -49,7 +49,7 @@ export const useAuthStore = create<AuthStore>()(
         set({ isLoading: true });
         try {
           const response = await authService.login({ email, password });
-          console.log('Login successful:', response);
+          // Login successful
           set({
             user: response.user,
             token: response.accessToken,
@@ -83,7 +83,6 @@ export const useAuthStore = create<AuthStore>()(
       },
 
       logout: () => {
-        console.log('Logging out user');
         set({
           user: null,
           token: null,
@@ -133,27 +132,18 @@ export const useAuthStore = create<AuthStore>()(
       },
 
       checkAuth: async () => {
-        console.log('🔍 CheckAuth called');
-        
         // Primero, siempre revisar localStorage
         const storedToken = localStorage.getItem('token');
         const storedUser = localStorage.getItem('user');
         
-        console.log('📦 LocalStorage check:', {
-          hasToken: !!storedToken,
-          hasUser: !!storedUser
-        });
-        
         if (storedToken && storedUser) {
           try {
             const user = JSON.parse(storedUser);
-            console.log('✅ Restoring user from localStorage:', user);
             
             // Validar el token con el servidor y obtener información actualizada del usuario
             try {
               const response = await authService.getProfile();
               const updatedUser = response.user;
-              console.log('🔄 User data updated from server:', updatedUser);
               
               // Actualizar localStorage con la información más reciente
               localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -164,7 +154,6 @@ export const useAuthStore = create<AuthStore>()(
                 isAuthenticated: true,
               });
             } catch (serverError) {
-              console.log('⚠️ Server validation failed, using cached user data');
               // Si falla la validación del servidor, usar los datos en caché
               set({
                 user,
@@ -174,7 +163,7 @@ export const useAuthStore = create<AuthStore>()(
             }
             return;
           } catch (error) {
-            console.error('❌ Error parsing stored user:', error);
+            console.error('Error parsing stored user:', error);
             // Limpiar localStorage corrupto
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
@@ -183,7 +172,6 @@ export const useAuthStore = create<AuthStore>()(
         }
 
         // Si no hay datos en localStorage, limpiar el estado
-        console.log('🚫 No valid localStorage data, clearing state');
         set({
           user: null,
           token: null,
@@ -225,12 +213,7 @@ export const useAuthStore = create<AuthStore>()(
         isAuthenticated: state.isAuthenticated,
       }),
       onRehydrateStorage: () => (state) => {
-        console.log('Auth store rehydrated:', state);
-        if (state) {
-          console.log('Rehydrated user:', state.user);
-          console.log('Rehydrated token:', state.token);
-          console.log('Rehydrated isAuthenticated:', state.isAuthenticated);
-        }
+        // Store rehydrated successfully
       },
     }
   )

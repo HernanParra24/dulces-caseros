@@ -72,7 +72,9 @@ export default function ContactoPage() {
     setIsSubmitting(true);
 
     try {
+      console.log('Enviando datos del formulario:', formData);
       const result = await contactService.sendMessage(formData);
+      console.log('Respuesta del servidor:', result);
       
       toast.success(result.message || '¡Mensaje enviado exitosamente! Te responderemos pronto.');
       
@@ -87,6 +89,10 @@ export default function ContactoPage() {
       
     } catch (error) {
       console.error('Error al enviar mensaje:', error);
+      if (error.response) {
+        console.error('Respuesta del servidor:', error.response.data);
+        console.error('Status:', error.response.status);
+      }
       toast.error('Error al enviar el mensaje. Por favor intenta nuevamente.');
     } finally {
       setIsSubmitting(false);

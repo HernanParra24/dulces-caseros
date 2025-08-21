@@ -73,21 +73,12 @@ export function OrderHistory({ className = '' }: OrderHistoryProps) {
   const loadOrders = async () => {
     try {
       setLoading(true);
-      console.log('🔄 Cargando pedidos para usuario:', user?.email);
+      // Loading orders for user
       const data = await orderService.getMyOrders();
-      console.log('📦 Datos recibidos del backend:', data);
-      console.log('📋 Número de pedidos:', data?.length || 0);
+              // Data received from backend
+              // Number of orders
       if (data && data.length > 0) {
-        console.log('📄 Primer pedido:', {
-          id: data[0].id,
-          orderNumber: data[0].orderNumber,
-          itemsCount: data[0].items?.length || 0,
-          items: data[0].items?.map((item: any) => ({
-            id: item.id,
-            productName: item.productName,
-            quantity: item.quantity
-          }))
-        });
+        // First order data
       }
       setOrders(data || []);
     } catch (error) {

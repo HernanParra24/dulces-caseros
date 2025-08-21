@@ -53,7 +53,7 @@ export function UserSettings() {
   const loadSettings = async () => {
     try {
       const data = await userService.getSettings();
-      console.log('Settings loaded:', data);
+              // Settings loaded
       setSettings(data);
     } catch (error) {
       console.error('Error loading settings:', error);
