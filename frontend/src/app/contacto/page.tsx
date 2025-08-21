@@ -87,7 +87,7 @@ export default function ContactoPage() {
         mensaje: ''
       });
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error al enviar mensaje:', error);
       if (error.response) {
         console.error('Respuesta del servidor:', error.response.data);
