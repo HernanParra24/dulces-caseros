@@ -82,6 +82,7 @@ export class ReviewsService {
       
       const reviews = await this.reviewRepository.find({
         where: { productId },
+        relations: ['user'],
         order: { createdAt: 'DESC' },
       });
       console.log('Found reviews:', reviews.length);
