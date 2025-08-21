@@ -1,21 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Fondo circular con gradiente -->
+  <!-- Definiciones de gradientes -->
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="jarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#9333ea;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="contentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
   </defs>
   
-  <!-- Círculo de fondo -->
-  <circle cx="50" cy="50" r="45" fill="url(#bgGradient)"/>
+  <!-- Fondo circular -->
+  <circle cx="50" cy="50" r="45" fill="url(#jarGradient)"/>
   
-  <!-- Letra D -->
-  <text x="50" y="65" font-family="Arial, sans-serif" font-size="45" font-weight="bold" text-anchor="middle" fill="white">D</text>
+  <!-- Frasquito de dulce -->
+  <!-- Tapa del frasco -->
+  <rect x="35" y="25" width="30" height="8" rx="4" fill="#8B4513"/>
   
-  <!-- Pequeño detalle decorativo -->
-  <circle cx="75" cy="25" r="3" fill="white" opacity="0.3"/>
-  <circle cx="25" cy="75" r="2" fill="white" opacity="0.3"/>
+  <!-- Cuerpo del frasco -->
+  <rect x="30" y="33" width="40" height="35" rx="3" fill="rgba(255,255,255,0.9)"/>
+  
+  <!-- Contenido del dulce -->
+  <rect x="32" y="35" width="36" height="31" rx="2" fill="url(#contentGradient)"/>
+  
+  <!-- Detalles del dulce (ondas) -->
+  <path d="M 32 45 Q 50 50 68 45" stroke="#d97706" stroke-width="2" fill="none"/>
+  <path d="M 32 55 Q 50 60 68 55" stroke="#d97706" stroke-width="2" fill="none"/>
+  <path d="M 32 65 Q 50 70 68 65" stroke="#d97706" stroke-width="2" fill="none"/>
+  
+  <!-- Etiqueta del frasco -->
+  <rect x="35" y="40" width="30" height="8" fill="rgba(255,255,255,0.8)"/>
+  <text x="50" y="46" font-family="Arial, sans-serif" font-size="6" font-weight="bold" text-anchor="middle" fill="#8B4513">DT</text>
+  
+  <!-- Brillo en el frasco -->
+  <rect x="32" y="35" width="3" height="31" fill="rgba(255,255,255,0.3)"/>
 </svg>
 
 
