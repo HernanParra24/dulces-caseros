@@ -53,14 +53,14 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
               <button 
                 onClick={() => scrollToSection('productos')} 
-                className="btn btn-primary btn-lg"
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <ShoppingBag className="w-5 h-5 mr-2" />
                 Ver Productos
               </button>
               <button 
                 onClick={() => scrollToSection('sobre-nosotros')} 
-                className="btn btn-outline btn-lg"
+                className="inline-flex items-center px-6 py-3 bg-white text-gray-800 font-semibold border-2 border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Conoce Nuestra Historia
               </button>
