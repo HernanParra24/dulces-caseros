@@ -321,8 +321,6 @@ export class AdminController {
   }
 
   @Delete('delete-test-admin')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(UserRole.ADMIN)
   async deleteTestAdmin() {
     try {
       const result = await this.adminService.deleteTestAdmin();
