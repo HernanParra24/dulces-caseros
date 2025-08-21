@@ -125,13 +125,13 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           {/* Content */}
-          <div className="p-4 flex flex-col h-full">
+          <div className="p-6 flex flex-col h-full">
             <div className="flex-1">
-              <h3 className="font-semibold text-base mb-2 text-gray-900 group-hover:text-orange-600 transition-colors">
+              <h3 className="font-semibold text-lg mb-3 text-gray-900 group-hover:text-orange-600 transition-colors">
                 {product.name}
               </h3>
               
-              <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+              <p className="text-gray-600 text-base mb-3 line-clamp-2">
                 {product.description}
               </p>
 
@@ -153,7 +153,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Price and stock - siempre al final */}
             <div className="flex items-center justify-between mt-auto">
               <div className="flex items-center space-x-2">
-                <span className="text-lg font-bold text-orange-600">
+                <span className="text-xl font-bold text-orange-600">
                   {formatPrice(product.price)}
                 </span>
                 <StockIndicator 
