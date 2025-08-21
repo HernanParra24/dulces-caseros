@@ -13,7 +13,7 @@
     }
   ],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://dulces-caseros-backend.onrender.com"
+    "NEXT_PUBLIC_API_URL": "http://localhost:3001"
   }
 }
 
