@@ -62,7 +62,10 @@ export function AdminNotificationPreferences() {
 
     // Filtrar por tipo de notificación
     if (filterType !== 'all') {
-      filtered = filtered.filter(user => user.notificationPreferences[filterType] === true);
+      filtered = filtered.filter(user => {
+        const preferences = user.notificationPreferences as any;
+        return preferences[filterType] === true;
+      });
     }
 
     setFilteredUsers(filtered);
