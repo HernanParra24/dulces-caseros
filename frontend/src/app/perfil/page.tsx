@@ -64,6 +64,26 @@ function PerfilContent() {
     }
   }, [searchParams]);
 
+  // Manejar hash fragments para navegación directa a pestañas
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && ['profile', 'orders', 'favorites', 'settings', 'stats'].includes(hash)) {
+        setActiveTab(hash as TabType);
+      }
+    };
+
+    // Verificar hash inicial
+    handleHashChange();
+
+    // Escuchar cambios en el hash
+    window.addEventListener('hashchange', handleHashChange);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
