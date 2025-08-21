@@ -25,7 +25,8 @@ export class EmailVerificationService {
         { expiresIn: '24h' }
       );
 
-      const verificationUrl = `http://localhost:3000/verify-email?token=${verificationToken}`;
+      const frontendUrl = process.env.FRONTEND_URL || 'https://dulces-caseros.vercel.app';
+      const verificationUrl = `${frontendUrl}/verify-email?token=${verificationToken}`;
 
       const mailOptions = {
         from: '"Dulces Caseros - Verificación" <dulcetwilightdc@gmail.com>',

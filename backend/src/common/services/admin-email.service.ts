@@ -83,7 +83,8 @@ export class AdminEmailService {
 
   async sendPasswordResetEmail(to: string, firstName: string, resetToken: string): Promise<void> {
     try {
-      const resetUrl = `http://localhost:3000/reset-password?token=${resetToken}`;
+      const frontendUrl = process.env.FRONTEND_URL || 'https://dulces-caseros.vercel.app';
+      const resetUrl = `${frontendUrl}/reset-password?token=${resetToken}`;
       
       const mailOptions = {
         from: '"Dulces Caseros - Recuperación" <dulcetwilightdc@gmail.com>',
@@ -174,7 +175,7 @@ export class AdminEmailService {
               </p>
               
               <div style="text-align: center; margin: 30px 0;">
-                <a href="http://localhost:3000/contacto" 
+                <a href="${frontendUrl}/contacto" 
                    style="background-color: #e67e22; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold;">
                   📧 Contactar nuevamente
                 </a>
