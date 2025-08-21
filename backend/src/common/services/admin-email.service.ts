@@ -148,6 +148,7 @@ export class AdminEmailService {
 
   async sendContactResponseEmail(to: string, nombre: string, asunto: string, respuesta: string): Promise<void> {
     try {
+      const frontendUrl = process.env.FRONTEND_URL || 'https://dulces-caseros.vercel.app';
       const mailOptions = {
         from: '"Dulces Caseros - Soporte" <dulcetwilightdc@gmail.com>',
         to: to,
