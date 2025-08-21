@@ -42,6 +42,28 @@ export default function RootLayout({
         <meta httpEquiv="Content-Security-Policy" content="frame-src 'self' https://www.google.com https://maps.google.com https://www.google.com/maps;" />
         <style>{`
           /* Animaciones suaves para los toasts */
+          @keyframes slideIn {
+            from {
+              transform: translateX(100%);
+              opacity: 0;
+            }
+            to {
+              transform: translateX(0);
+              opacity: 1;
+            }
+          }
+          
+          @keyframes fadeOut {
+            from {
+              transform: translateX(0);
+              opacity: 1;
+            }
+            to {
+              transform: translateX(100%);
+              opacity: 0;
+            }
+          }
+          
           .toast-enter {
             transform: translateX(100%);
             opacity: 0;
@@ -75,7 +97,7 @@ export default function RootLayout({
             containerClassName=""
             containerStyle={{}}
             toastOptions={{
-              duration: 4000,
+              duration: 3000,
               style: {
                 background: '#363636',
                 color: '#fff',
@@ -84,9 +106,10 @@ export default function RootLayout({
                 padding: '12px 16px',
                 borderRadius: '8px',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                animation: 'slideIn 0.3s ease-out, fadeOut 0.3s ease-in 2.7s',
               },
               success: {
-                duration: 3500,
+                duration: 2500,
                 iconTheme: {
                   primary: '#10b981',
                   secondary: '#fff',
@@ -97,7 +120,7 @@ export default function RootLayout({
                 },
               },
               error: {
-                duration: 5000,
+                duration: 4000,
                 iconTheme: {
                   primary: '#ef4444',
                   secondary: '#fff',

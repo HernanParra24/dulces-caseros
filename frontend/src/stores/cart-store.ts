@@ -2,38 +2,16 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { CartItem, Product } from '@/types';
 import { calculateShippingCost, calculateTotal } from '@/lib/utils';
-import { toast } from 'react-hot-toast';
+import { showSuccessToast, showErrorToast } from '@/lib/toast-utils';
 
-// Set para rastrear notificaciones activas
-const activeNotifications = new Set<string>();
-
-// Función para mostrar notificaciones con ID único para prevenir duplicados
-const showNotification = (message: string, type: 'success' | 'error' = 'success', productId?: string) => {
-  const baseId = productId ? `${type}-${productId}` : `${type}-${message}`;
-  
-  // Verificar si ya existe una notificación similar
-  if (activeNotifications.has(baseId)) {
-    return; // No mostrar duplicados
-  }
-  
-  const notificationId = `${baseId}-${Date.now()}`;
-  activeNotifications.add(baseId);
-  
-  // Limpiar el ID después de un tiempo
-  setTimeout(() => {
-    activeNotifications.delete(baseId);
-  }, 2000);
+// Función para mostrar notificaciones del carrito
+const showCartNotification = (message: string, type: 'success' | 'error' = 'success', productId?: string) => {
+  const context = productId ? `cart-${productId}` : 'cart';
   
   if (type === 'success') {
-    toast.success(message, { 
-      duration: 3000,
-      id: notificationId
-    });
+    showSuccessToast(message, context);
   } else {
-    toast.error(message, { 
-      duration: 5000,
-      id: notificationId
-    });
+    showErrorToast(message, context);
   }
 };
 
@@ -72,7 +50,7 @@ export const useCartStore = create<CartStore>()(
         if (existingItem) {
           const newQuantity = existingItem.quantity + quantity;
           if (newQuantity > product.stock) {
-            showNotification(`Solo hay ${product.stock} unidades disponibles de ${product.name}`, 'error', product.id);
+            showCartNotification(`Solo hay ${product.stock} unidades disponibles de ${product.name}`, 'error', product.id);
             return;
           }
           
@@ -83,17 +61,17 @@ export const useCartStore = create<CartStore>()(
                 : item
             ),
           });
-          showNotification(`Cantidad actualizada: ${product.name}`, 'success', product.id);
+          showCartNotification(`Cantidad actualizada: ${product.name}`, 'success', product.id);
         } else {
-          if (quantity > product.stock) {
-            showNotification(`Solo hay ${product.stock} unidades disponibles de ${product.name}`, 'error', product.id);
-            return;
-          }
+                if (quantity > product.stock) {
+        showCartNotification(`Solo hay ${product.stock} unidades disponibles de ${product.name}`, 'error', product.id);
+        return;
+      }
           
           set({
             items: [...items, { product, quantity }],
           });
-          showNotification(`${product.name} agregado al carrito`, 'success', product.id);
+          showCartNotification(`${product.name} agregado al carrito`, 'success', product.id);
         }
       },
 
@@ -106,7 +84,7 @@ export const useCartStore = create<CartStore>()(
         });
         
         if (item) {
-          showNotification(`${item.product.name} removido del carrito`, 'success', productId);
+          showCartNotification(`${item.product.name} removido del carrito`, 'success', productId);
         }
       },
 
@@ -122,7 +100,7 @@ export const useCartStore = create<CartStore>()(
         }
 
         if (quantity > item.product.stock) {
-          showNotification(`Solo hay ${item.product.stock} unidades disponibles de ${item.product.name}`, 'error', productId);
+          showCartNotification(`Solo hay ${item.product.stock} unidades disponibles de ${item.product.name}`, 'error', productId);
           return;
         }
 
@@ -137,7 +115,7 @@ export const useCartStore = create<CartStore>()(
 
       clearCart: () => {
         set({ items: [] });
-        showNotification('Carrito vaciado', 'success');
+        showCartNotification('Carrito vaciado', 'success');
       },
 
       toggleCart: () => {

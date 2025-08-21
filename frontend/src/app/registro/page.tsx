@@ -88,7 +88,7 @@ export default function RegistroPage() {
 
     try {
       await register(formData);
-      router.push('/login?message=Registro exitoso. Ya puedes iniciar sesión.');
+      router.push('/login?message=Registro exitoso. Verifica tu cuenta para poder iniciar sesión.');
     } catch (error) {
       console.error('Error en el registro:', error);
     }

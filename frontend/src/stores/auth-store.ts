@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { User } from '@/types';
 import { authService } from '@/lib/api';
-import { toast } from 'react-hot-toast';
+import { showSuccessToast, showErrorToast } from '@/lib/toast-utils';
 
 interface AuthState {
   user: User | null;
@@ -62,7 +62,7 @@ export const useAuthStore = create<AuthStore>()(
           localStorage.setItem('refreshToken', response.refreshToken);
           localStorage.setItem('user', JSON.stringify(response.user));
           
-          toast.success('Inicio de sesión exitoso');
+          showSuccessToast('Inicio de sesión exitoso', 'login');
         } catch (error) {
           console.error('Login error:', error);
           set({ isLoading: false });
@@ -75,7 +75,7 @@ export const useAuthStore = create<AuthStore>()(
         try {
           const response = await authService.register(userData);
           set({ isLoading: false });
-          toast.success(response.message);
+          showSuccessToast(response.message, 'register');
         } catch (error) {
           set({ isLoading: false });
           throw error;
@@ -93,7 +93,7 @@ export const useAuthStore = create<AuthStore>()(
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
         
-        toast.success('Sesión cerrada exitosamente', { duration: 3000 });
+        showSuccessToast('Sesión cerrada exitosamente', 'logout');
       },
 
       updateProfile: async (data: Partial<User>) => {
@@ -185,7 +185,7 @@ export const useAuthStore = create<AuthStore>()(
         try {
           const response = await authService.forgotPassword(email);
           set({ isLoading: false });
-          toast.success(response.message);
+          showSuccessToast(response.message, 'forgot-password');
         } catch (error) {
           set({ isLoading: false });
           throw error;
@@ -197,7 +197,7 @@ export const useAuthStore = create<AuthStore>()(
         try {
           const response = await authService.resetPassword(data);
           set({ isLoading: false });
-          toast.success(response.message);
+          showSuccessToast(response.message, 'reset-password');
         } catch (error) {
           set({ isLoading: false });
           throw error;
