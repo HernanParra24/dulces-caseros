@@ -82,7 +82,7 @@ export function OrderHistory({ className = '' }: OrderHistoryProps) {
           id: data[0].id,
           orderNumber: data[0].orderNumber,
           itemsCount: data[0].items?.length || 0,
-          items: data[0].items?.map(item => ({
+          items: data[0].items?.map((item: any) => ({
             id: item.id,
             productName: item.productName,
             quantity: item.quantity
