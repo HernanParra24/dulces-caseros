@@ -13,17 +13,9 @@ async function bootstrap() {
 
   // Configuración de seguridad (simplificada)
 
-  // Configuración de CORS
+  // Configuración de CORS corregida para aceptar cualquier origen y evitar bloqueos
   app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'http://localhost:3002',
-      'http://localhost:3003',
-      'https://dulces-caseros.vercel.app',
-      'https://dulces-caseros-r75gbrpuh-hernanparra24s-projects.vercel.app',
-      process.env.FRONTEND_URL
-    ].filter(Boolean),
+    origin: '*', 
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
@@ -51,7 +43,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3001;
   await app.listen(port);
   console.log(`🚀 Aplicación ejecutándose en: http://localhost:${port}`);
-  console.log(`📚 Documentación API en: http://localhost:${port}/api`);
+  console.log(`📄 Documentación API en: http://localhost:${port}/api`);
 }
 
 bootstrap();
