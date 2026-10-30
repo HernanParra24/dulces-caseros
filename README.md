@@ -87,6 +87,15 @@ npm run build        # Build para producción
 npm run start:prod   # Iniciar en producción
 ```
 
+## 📚 Documentación
+
+Guías y notas del proyecto en [`docs/`](docs/):
+
+- [Instalación](docs/INSTALACION.md) · [Resumen del proyecto](docs/RESUMEN_PROYECTO.md) · [Estado actual del sistema](docs/ESTADO_ACTUAL_SISTEMA.md)
+- Configuración: [Cloudinary](docs/CLOUDINARY_SETUP.md) · [Google Maps](docs/GOOGLE_MAPS_SETUP.md)
+- Pruebas: [Flujo de pedidos](docs/test-order-flow.md)
+- Problemas resueltos: [servidor](docs/PROBLEMA_SERVIDOR_SOLUCIONADO.md) · [stock bajo](docs/STOCK_BAJO_SOLUCIONADO.md) · [notificaciones de stock bajo](docs/NOTIFICACIONES_STOCK_BAJO_SOLUCIONADO.md) · [notificaciones duplicadas](docs/NOTIFICACIONES_DUPLICADAS_SOLUCIONADO.md) · [limpieza de emails](docs/LIMPIEZA_EMAIL_COMPLETADA.md) · [verificación de email opcional](docs/VERIFICACION_EMAIL_OPCIONAL.md) · [verificación eliminada](docs/VERIFICACION_ELIMINADA.md) · [perfil y newsletter](docs/PERFIL_SIMPLIFICADO_NEWSLETTER.md)
+
 ## 👥 Autores
 
 - **Hernán Parra** - Desarrollo completo

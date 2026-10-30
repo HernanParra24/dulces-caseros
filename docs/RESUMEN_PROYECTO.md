@@ -131,8 +131,9 @@ dulces-caseros/
 │   ├── package.json
 │   └── .env.local
 ├── README.md
-├── INSTALACION.md
-└── RESUMEN_PROYECTO.md
+└── docs/
+    ├── INSTALACION.md
+    └── RESUMEN_PROYECTO.md
 ```
 
 ## 🎨 Características de Diseño
