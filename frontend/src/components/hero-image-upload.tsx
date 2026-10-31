@@ -48,7 +48,7 @@ export default function HeroImageUpload({
       const formData = new FormData();
       formData.append('image', file);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://dulces-caseros.onrender.com'}/upload/image`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://dulces-caseros-api.vercel.app'}/upload/image`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

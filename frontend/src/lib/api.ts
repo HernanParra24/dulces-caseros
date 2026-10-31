@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { User } from '@/types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://dulces-caseros.onrender.com';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://dulces-caseros-api.vercel.app';
 
 export const api = axios.create({
   baseURL: API_URL,

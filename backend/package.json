@@ -6,7 +6,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "npx nest build",
+    "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "npx nest start",
     "start:dev": "npx nest start --watch",
@@ -36,7 +36,6 @@
     "@sendgrid/mail": "^8.1.5",
     "@types/multer": "^1.4.13",
     "@types/nodemailer": "^6.4.17",
-    "@types/sqlite3": "^3.1.11",
     "axios": "^1.11.0",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
@@ -55,7 +54,6 @@
     "reflect-metadata": "^0.1.13",
     "resend": "^2.1.0",
     "rxjs": "^7.8.1",
-    "sqlite3": "^5.1.7",
     "typeorm": "^0.3.17",
     "@nestjs/cli": "^10.0.0"
   },

@@ -18,11 +18,21 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
   constructor(private configService: ConfigService) {}
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
+    const url =
+      this.configService.get<string>('DATABASE_URL') ||
+      'postgresql://postgres:password123@localhost:5432/dulces_caseros';
+    const isLocal = /@(localhost|127\.0\.0\.1)[:/]/.test(url);
+
     return {
       type: 'postgres',
-                    url: this.configService.get<string>('DATABASE_URL') || 'postgresql://postgres:password123@localhost:5432/dulces_caseros',
+      url,
       entities: [User, Product, UpcomingProduct, Order, OrderItem, Review, Favorite, SupportTicket, ContactMessage, Notification, SiteConfig],
-      synchronize: true,
+      // En Vercel cada instancia arranca en frío y sincronizar el esquema en cada arranque es lento:
+      // se desactiva con DB_SYNCHRONIZE=false una vez creadas las tablas.
+      synchronize: this.configService.get<string>('DB_SYNCHRONIZE') !== 'false',
+      ssl: isLocal ? false : { rejectUnauthorized: false },
+      // Pocas conexiones por instancia: en serverless corren varias instancias en paralelo
+      extra: { max: isLocal ? 10 : 3 },
       logging: this.configService.get<string>('NODE_ENV') === 'development',
     };
   }

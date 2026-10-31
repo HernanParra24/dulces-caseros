@@ -6,7 +6,7 @@ Una plataforma de e-commerce completa para la venta de dulces artesanales argent
 
 - **Frontend**: Next.js con React y TypeScript
 - **Backend**: NestJS con TypeScript
-- **Base de Datos**: PostgreSQL
+- **Base de Datos**: PostgreSQL (Neon, plan gratuito)
 - **Autenticación**: JWT
 - **Panel de Administración**: Gestión completa de productos, usuarios y pedidos
 - **Sección "Próximamente"**: Para mostrar productos futuros
@@ -61,7 +61,7 @@ Una plataforma de e-commerce completa para la venta de dulces artesanales argent
 
 ### Frontend (.env.local)
 ```env
-NEXT_PUBLIC_API_URL=https://tu-backend.onrender.com
+NEXT_PUBLIC_API_URL=https://dulces-caseros-api.vercel.app
 ```
 
 ### Backend (.env)
